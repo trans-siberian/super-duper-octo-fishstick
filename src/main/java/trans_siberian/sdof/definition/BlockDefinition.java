@@ -104,7 +104,7 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 		//
 		// Remember that this implementation just gives up. Some of the
 		// following implementations tho are able to fallback to other ways to
-		// build the method!
+		// build the model!
 		//
 		// Currently, we just make sure that all of our "simple blocks" have
 		// a model json
