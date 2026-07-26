@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.client.render.block.model.*;
 import trans_siberian.sdof.definition.BlockDefinition;
-import trans_siberian.sdof.model.BlockModelGenericCheckeredStairs;
+import trans_siberian.sdof.model.BlockModelCheckeredStairs;
 
 public class SDOFModels {
 	public static boolean hasInit = false;
@@ -25,7 +25,7 @@ public class SDOFModels {
 		// vanilla stairs just rotates the model; our checkered blocks' patterns are
 		// mirrored on north/south faces, if we simply rotate the model,
 		// the mirrored patterns will some times be on west/east as well :O
-		dispatcher.addDispatch(new BlockModelGenericCheckeredStairs<>(
+		dispatcher.addDispatch(new BlockModelCheckeredStairs<>(
 			SDOFBlocks.POLISHED_CHECKERED_TILES_STAIRS,
 			BlockModelDispatcher.loadDataModel(MOD_ID + ":block/stairs/polished_checkered_tiles_stair/north_south").asModel(),
 			BlockModelDispatcher.loadDataModel(MOD_ID + ":block/stairs/polished_checkered_tiles_stair/west_east").asModel()

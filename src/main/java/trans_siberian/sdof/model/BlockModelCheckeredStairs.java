@@ -7,11 +7,11 @@ import net.minecraft.client.render.block.model.generic.BlockModelGenericStairs;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogicStairs;
 
-public class BlockModelGenericCheckeredStairs<Stairs extends BlockLogicStairs> extends BlockModelGenericStairs<Stairs> {
+public class BlockModelCheckeredStairs<Stairs extends BlockLogicStairs> extends BlockModelGenericStairs<Stairs> {
 	private @NotNull final StaticBlockModel staticModelNorthSouth;
 	private @NotNull final StaticBlockModel staticModelWestEast;
 
-	public BlockModelGenericCheckeredStairs(
+	public BlockModelCheckeredStairs(
 		@NotNull final Block<Stairs> block,
 		@NotNull final StaticBlockModel staticModelNorthSouth,
 		@NotNull final StaticBlockModel staticModelWestEast
