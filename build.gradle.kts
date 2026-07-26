@@ -94,7 +94,10 @@ tasks {
 		languageVersion = libs.versions.gradleJava.map { JavaLanguageVersion.of(it.toInt()) }
 		vendor = JvmVendorSpec.ADOPTIUM
 	}
-	withType<JavaExec>().configureEach { defaultCharacterEncoding = "UTF-8" }
+	withType<JavaExec>().configureEach {
+		defaultCharacterEncoding = "UTF-8"
+		jvmArgs("-ea") // enable assertion
+	}
 	withType<Javadoc>().configureEach { options.encoding = "UTF-8" }
 	withType<Test>().configureEach { defaultCharacterEncoding = "UTF-8" }
 	withType<Jar>().configureEach {

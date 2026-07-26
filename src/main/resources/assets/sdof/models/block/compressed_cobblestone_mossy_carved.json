@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"end": "minecraft:block/motion_sensor/side",
+		"side": "sdof:block/compressed/carved_compressed_mossy_cobblestone"
+	}
+}

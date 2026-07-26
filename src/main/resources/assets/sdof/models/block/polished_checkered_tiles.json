@@ -1,0 +1,11 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "down": "sdof:block/tiles/tiles_polished_checkered",
+        "up": "sdof:block/tiles/tiles_polished_checkered",
+        "north": "sdof:block/tiles/tiles_polished_checkered_alt",
+        "east": "sdof:block/tiles/tiles_polished_checkered",
+        "south": "sdof:block/tiles/tiles_polished_checkered_alt",
+        "west": "sdof:block/tiles/tiles_polished_checkered"
+    }
+}

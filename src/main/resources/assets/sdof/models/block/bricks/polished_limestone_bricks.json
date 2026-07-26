@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "sdof:block/bricks/bricks_polished_limestone"
+  }
+}

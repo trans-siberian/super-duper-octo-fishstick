@@ -1,0 +1,12 @@
+{
+  "parent": "sdof:block/stairs/polished_checkered_tiles_stair/_template",
+  "textures": {
+    "d":  "#a",
+    "u":  "#a", "u2": "#a",
+
+    "n":  "#b", "n2": "#b",
+    "s":  "#b", "s2": "#b",
+    "w":  "#a", "w2": "#a",
+    "e":  "#a", "e2": "#a"
+  }
+}
