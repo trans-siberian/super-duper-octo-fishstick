@@ -207,7 +207,7 @@ public class SDOFBlocks {
 			.setTags(BlockTags.MINEABLE_BY_PICKAXE)
 			.setBlockSound(BlockSounds.STONE));
 
-		// 		STONE_STAIRS                     = make(STONE_ISH.stairs("stone_stair", Blocks.STONE));
+		STONE_STAIRS                     = make(STONE_ISH.stairs("stone_stair", Blocks.STONE));
 		STONE_SLAB                       = make(stones.slab("stone_slab", Blocks.STONE));
 		LIMESTONE_STAIRS                 = make(stones.stairs("limestone_stair", Blocks.LIMESTONE));
 		LIMESTONE_SLAB                   = make(stones.slab("limestone_slab", Blocks.LIMESTONE));
