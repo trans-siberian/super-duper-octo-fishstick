@@ -13,7 +13,7 @@ import turniplabs.halplibe.helper.BlockBuilder;
 // instantiate BlockDefinitions (hence the name)
 
 public class BlockMetaDefinition {
-	public final @NotNull BlockBuilder builder;
+	public @NotNull BlockBuilder builder;
 	public BlockMetaDefinition(@NotNull BlockBuilder builder) {
 		this.builder = builder;
 	}

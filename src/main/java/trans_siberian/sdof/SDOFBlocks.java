@@ -278,8 +278,7 @@ public class SDOFBlocks {
 		/// COMPRESSEDS ///
 		///////////////////
 
-		final var compresseds = new BlockMetaDefinition.WithMaterial(Materials.STONE, stones.builder.clone()
-			.setHardness(0.8F));
+		final var compresseds = new BlockMetaDefinition.WithMaterial(Materials.STONE, stones.builder.setHardness(0.8F));
 
 		// compressed cobblestone
 		COMPRESSED_COBBLESTONE                = make(compresseds.simple("compressed_cobblestone"));
@@ -301,7 +300,7 @@ public class SDOFBlocks {
 		COMPRESSED_POLISHED_STONE_TILES_SLAB  = make(compresseds.slab("compressed_polished_stone_tiles_slab", COMPRESSED_POLISHED_STONE_TILES));
 
 		// compressed polished netherrack
-		compresseds.builder.setHardness(0.8F);
+		compresseds.builder = compresseds.builder.setHardness(0.8F);
 		COMPRESSED_POLISHED_NETHERRACK        = make(compresseds.simple("compressed_polished_netherrack"));
 		COMPRESSED_POLISHED_NETHERRACK_CARVED = make(compresseds.simple("compressed_polished_netherrack_carved"));
 		COMPRESSED_POLISHED_NETHERRACK_SLAB   = make(compresseds.slab("compressed_polished_netherrack_slab", COMPRESSED_POLISHED_NETHERRACK_CARVED));
@@ -323,7 +322,7 @@ public class SDOFBlocks {
 		SHORED_GRAVEL_SLAB   = make(shoreds.slab("shored_gravel_slab", SHORED_GRAVEL));
 
 		// shored sand
-		shoreds.builder.setHardness(0.5F).setBlockSound(BlockSounds.SAND);
+		shoreds.builder = shoreds.builder.setHardness(0.5F).setBlockSound(BlockSounds.SAND);
 		shoreds.material = Materials.SAND;
 
 		SHORED_SAND          = make(shoreds.simple("shored_sand"));
