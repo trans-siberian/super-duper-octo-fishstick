@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "camoweed.blockexamplemod.mixin",
+  "package": "trans_siberian.sdof.mixin",
   "compatibilityLevel": "JAVA_${java}",
   "injectors": {
     "defaultRequire": 1
