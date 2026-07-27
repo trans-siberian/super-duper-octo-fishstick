@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "minecraft:block/furnace_stone/bottom"
+    "all": "sdof:block/compressed/compressed_polished_stone"
   }
 }

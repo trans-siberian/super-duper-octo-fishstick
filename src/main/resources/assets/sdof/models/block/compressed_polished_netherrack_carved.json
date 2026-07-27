@@ -1,7 +1,7 @@
 {
 	"parent": "minecraft:block/cube_column",
 	"textures": {
-		"end": "minecraft:block/activator/bottom",
-		"side": "sdof:block/compressed/carved_compressed_polished_netherrack"
+		"end": "sdof:block/compressed/compressed_polished_netherrack",
+		"side": "sdof:block/compressed/compressed_polished_netherrack_carved"
 	}
 }

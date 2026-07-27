@@ -1,7 +1,7 @@
 {
 	"parent": "minecraft:block/cube_column",
 	"textures": {
-		"end": "minecraft:block/furnace_stone/bottom",
-		"side": "sdof:block/compressed/carved_compressed_stone"
+		"end": "sdof:block/compressed/compressed_polished_stone",
+		"side": "sdof:block/compressed/compressed_polished_stone_carved"
 	}
 }
