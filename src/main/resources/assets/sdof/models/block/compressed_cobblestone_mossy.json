@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "minecraft:block/motion_sensor/side"
+    "all": "sdof:block/compressed/compressed_cobblestone_mossy"
   }
 }

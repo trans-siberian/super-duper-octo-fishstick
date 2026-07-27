@@ -91,3 +91,65 @@ tile.sdof.polished_checkered_tiles_stair.name = Polished Checkered Tiles Stairs
 tile.sdof.polished_checkered_tiles_stair.desc = Polished checkered tile block used for rapid vertical movement.
 tile.sdof.polished_checkered_tiles_slab.name = Polished Checkered Tiles Slab
 tile.sdof.polished_checkered_tiles_slab.desc = A slab of polished checkered tiles.
+
+tile.sdof.compressed_cobblestone.name = Compressed Cobblestone
+tile.sdof.compressed_cobblestone.desc = Cobblestone; compressed.
+tile.sdof.compressed_cobblestone_slab.name = Compressed Cobblestone Slab
+tile.sdof.compressed_cobblestone_slab.desc = A slab of compressed cobblestone.
+tile.sdof.compressed_cobblestone_carved.name = Carved Compressed Cobblestone
+tile.sdof.compressed_cobblestone_carved.desc = Cobblestone; compressed and carved.
+
+tile.sdof.compressed_cobblestone_mossy.name = Compressed Mossy Cobblestone
+tile.sdof.compressed_cobblestone_mossy.desc = Mossy cobblestone; compressed.
+tile.sdof.compressed_cobblestone_mossy_slab.name = Compressed Mossy Cobblestone Slab
+tile.sdof.compressed_cobblestone_mossy_slab.desc = A slab of compressed mossy cobblestone.
+tile.sdof.compressed_cobblestone_mossy_carved.name = Carved Compressed Mossy Cobblestone
+tile.sdof.compressed_cobblestone_mossy_carved.desc = Mossy cobblestone; compressed and carved.
+
+tile.sdof.compressed_polished_stone.name = Compressed Polished Stone
+tile.sdof.compressed_polished_stone.desc = Polished stone; compressed.
+tile.sdof.compressed_polished_stone_slab.name = Compressed Polished Stone Slab
+tile.sdof.compressed_polished_stone_slab.desc = A slab of compressed polished stone.
+tile.sdof.compressed_polished_stone_carved.name = Carved Compressed Polished Stone
+tile.sdof.compressed_polished_stone_carved.desc = Polished stone; compressed and carved.
+
+tile.sdof.compressed_polished_stone_tiles.name = Compressed Polished Stone Tiles
+tile.sdof.compressed_polished_stone_tiles.desc = Polished stone tiles; compressed.
+tile.sdof.compressed_polished_stone_tiles_slab.name = Compressed Polished Stone Tiles Slab
+tile.sdof.compressed_polished_stone_tiles_slab.desc = A slab of compressed polished stone tiles.
+tile.sdof.compressed_polished_stone_tiles_carved.name = Carved Compressed Polished Stone Tiles
+tile.sdof.compressed_polished_stone_tiles_carved.desc = Polished stone tiles; compressed and carved.
+
+tile.sdof.compressed_polished_netherrack.name = Compressed Netherrack
+tile.sdof.compressed_polished_netherrack.desc = Netherrack; compressed.
+tile.sdof.compressed_polished_netherrack_slab.name = Compressed Netherrack Slab
+tile.sdof.compressed_polished_netherrack_slab.desc = A slab of compressed netherrack.
+tile.sdof.compressed_polished_netherrack_carved.name = Carved Compressed Netherrack
+tile.sdof.compressed_polished_netherrack_carved.desc = Netherrack; compressed and carved.
+
+tile.sdof.small_marble_tiles.name = Small Marble Tiles
+tile.sdof.small_marble_tiles.desc = Itty, bitty marble tiles!
+tile.sdof.small_marble_tiles_stair.name = Small Marble Tiles
+tile.sdof.small_marble_tiles_stair.desc = Small marble tile block used for rapid vertical movement.
+tile.sdof.small_marble_tiles_slab.name = Small Marble Tiles
+tile.sdof.small_marble_tiles_slab.desc = A slab of small marble tiles.
+
+tile.sdof.small_lapis_tiles.name = Small Lapis Tiles
+tile.sdof.small_lapis_tiles.desc = Itty, bitty lapis tiles!
+tile.sdof.small_lapis_tiles_stair.name = Small Lapis Tiles
+tile.sdof.small_lapis_tiles_stair.desc = Small lapis tile block used for rapid vertical movement.
+tile.sdof.small_lapis_tiles_slab.name = Small Lapis Tiles
+tile.sdof.small_lapis_tiles_slab.desc = A slab of lapis marble tiles.
+
+tile.sdof.vent_block.name = Vent Block
+tile.sdof.vent_block.desc = Every kitchen needs one.
+
+tile.sdof.iron_plating.name = Iron Plating
+tile.sdof.iron_plating.desc = Industrial iron plating.
+tile.sdof.iron_plating_slab.name = Iron Plating Slab
+tile.sdof.iron_plating_slab.desc = A slab of iron plating.
+
+tile.sdof.steel_plating.name = Steel Plating
+tile.sdof.steel_plating.desc = Industrial steel plating.
+tile.sdof.steel_plating_slab.name = Steel Plating Slab
+tile.sdof.steel_plating_slab.desc = A slab of steel plating.
