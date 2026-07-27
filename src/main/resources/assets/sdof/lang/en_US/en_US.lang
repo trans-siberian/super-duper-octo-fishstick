@@ -127,6 +127,20 @@ tile.sdof.compressed_polished_netherrack_slab.desc = A slab of compressed nether
 tile.sdof.compressed_polished_netherrack_carved.name = Carved Compressed Netherrack
 tile.sdof.compressed_polished_netherrack_carved.desc = Netherrack; compressed and carved.
 
+tile.sdof.shored_gravel.name = Shored Gravel
+tile.sdof.shored_gravel.desc = Gravel supported with sticks. Sturdy enough not to fall.
+tile.sdof.shored_gravel_stair.name = Shored Gravel Stairs
+tile.sdof.shored_gravel_stair.desc = Shored gravel block used for rapid vertical movement.
+tile.sdof.shored_gravel_slab.name = Shored Gravel Slab
+tile.sdof.shored_gravel_slab.desc = A slab of shored gravel.
+
+tile.sdof.shored_sand.name = Shored Sand
+tile.sdof.shored_sand.desc = Sand supported with sticks. Sturdy enough not to fall.
+tile.sdof.shored_sand_stair.name = Shored Sand Stairs
+tile.sdof.shored_sand_stair.desc = Shored sand block used for rapid vertical movement.
+tile.sdof.shored_sand_slab.name = Shored Sand Slab
+tile.sdof.shored_sand_slab.desc = A slab of shored sand.
+
 tile.sdof.small_marble_tiles.name = Small Marble Tiles
 tile.sdof.small_marble_tiles.desc = Itty, bitty marble tiles!
 tile.sdof.small_marble_tiles_stair.name = Small Marble Tiles
