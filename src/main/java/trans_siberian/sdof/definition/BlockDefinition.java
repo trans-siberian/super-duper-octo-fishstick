@@ -18,6 +18,7 @@ import net.minecraft.core.block.BlockLogicSlab;
 import net.minecraft.core.block.BlockLogicStairs;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.material.Material;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.collection.NamespaceID;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.RecipeBuilder;
@@ -153,8 +154,8 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 		// Since our block in this case is derived, we provide a convenient method
 		// for making a shaped crafting recipe of it, with all ingredients being
 		// the base-block
-		public void makeShapedWorkbenchRecipe(@NotNull String @NotNull... shape) {
-			RecipeBuilder.Shaped(MOD_ID, shape).addInput('X', this.base).create(this.nameKey, this.block());
+		public void makeShapedWorkbenchRecipe(final int count, final @NotNull String @NotNull... shape) {
+			RecipeBuilder.Shaped(MOD_ID, shape).addInput('X', this.base).create(this.nameKey, new ItemStack(this.block(), count));
 		}
 	}
 
@@ -175,7 +176,7 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 
 		@Override
 		public void makeWorkbenchRecipe() {
-			this.makeShapedWorkbenchRecipe(
+			this.makeShapedWorkbenchRecipe(6,
 				"X  ",
 				"XX ",
 				"XXX"
@@ -220,7 +221,7 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 
 		@Override
 		public void makeWorkbenchRecipe() {
-			this.makeShapedWorkbenchRecipe(
+			this.makeShapedWorkbenchRecipe(6,
 				"XXX"
 			);
 		}
@@ -282,7 +283,7 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 
 		@Override
 		public void makeWorkbenchRecipe() {
-			this.makeShapedWorkbenchRecipe(
+			this.makeShapedWorkbenchRecipe(4,
 				"XX",
 				"XX"
 			);
@@ -319,7 +320,7 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 
 		@Override
 		public void makeWorkbenchRecipe() {
-			this.makeShapedWorkbenchRecipe(
+			this.makeShapedWorkbenchRecipe(2,
 				"XX",
 				"XX"
 			);
