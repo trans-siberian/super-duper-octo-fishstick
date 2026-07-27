@@ -18,7 +18,7 @@ Currently includes:
 <br>
 <img width="400" alt="tilessss" src="https://github.com/user-attachments/assets/0e9941e8-9196-4fbf-9720-902bcfb5e8e7" />
 <br>
-<img width="854" height="480" alt="image" src="https://github.com/user-attachments/assets/1a64e971-1846-432f-9ef8-8b6d397b2cf8" />
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/1a64e971-1846-432f-9ef8-8b6d397b2cf8" />
 <br>
 <br>
 Credits:<br>
