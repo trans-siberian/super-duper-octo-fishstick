@@ -3,6 +3,7 @@ package trans_siberian.sdof;
 import net.minecraft.core.block.*;
 import net.minecraft.core.block.material.Materials;
 import net.minecraft.core.block.tag.BlockTags;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.sound.BlockSounds;
 import trans_siberian.sdof.definition.BlockDefinition;
 import trans_siberian.sdof.definition.BlockMetaDefinition;
@@ -281,27 +282,27 @@ public class SDOFBlocks {
 		final var compresseds = new BlockMetaDefinition.WithMaterial(Materials.STONE, stones.builder.setHardness(0.8F));
 
 		// compressed cobblestone
-		COMPRESSED_COBBLESTONE                = make(compresseds.simple("compressed_cobblestone"));
+		COMPRESSED_COBBLESTONE                = make(compresseds.compressed("compressed_cobblestone", Blocks.COBBLE_STONE));
 		COMPRESSED_COBBLESTONE_CARVED         = make(compresseds.simple("compressed_cobblestone_carved"));
 		COMPRESSED_COBBLESTONE_SLAB           = make(compresseds.slab("compressed_cobblestone_slab", COMPRESSED_COBBLESTONE_CARVED));
 
 		// compressed mossy cobblestone
-		COMPRESSED_COBBLESTONE_MOSSY          = make(compresseds.simple("compressed_cobblestone_mossy"));
+		COMPRESSED_COBBLESTONE_MOSSY          = make(compresseds.compressed("compressed_cobblestone_mossy", Blocks.COBBLE_STONE_MOSSY));
 		COMPRESSED_COBBLESTONE_MOSSY_CARVED   = make(compresseds.simple("compressed_cobblestone_mossy_carved"));
 		COMPRESSED_COBBLESTONE_MOSSY_SLAB     = make(compresseds.slab("compressed_cobblestone_mossy_slab", COMPRESSED_COBBLESTONE_MOSSY_CARVED));
 
 		// compressed polished stone
-		COMPRESSED_POLISHED_STONE             = make(compresseds.simple("compressed_polished_stone"));
+		COMPRESSED_POLISHED_STONE             = make(compresseds.compressed("compressed_polished_stone", Blocks.STONE_POLISHED));
 		COMPRESSED_POLISHED_STONE_CARVED      = make(compresseds.simple("compressed_polished_stone_carved"));
 		COMPRESSED_POLISHED_STONE_SLAB        = make(compresseds.slab("compressed_polished_stone_slab", COMPRESSED_POLISHED_STONE_CARVED));
 
 		// compressed polished stone tiles
-		COMPRESSED_POLISHED_STONE_TILES       = make(compresseds.simple("compressed_polished_stone_tiles"));
+		COMPRESSED_POLISHED_STONE_TILES       = make(compresseds.compressed("compressed_polished_stone_tiles", SDOFBlocks.POLISHED_STONE_TILES));
 		COMPRESSED_POLISHED_STONE_TILES_SLAB  = make(compresseds.slab("compressed_polished_stone_tiles_slab", COMPRESSED_POLISHED_STONE_TILES));
 
 		// compressed polished netherrack
 		compresseds.builder = compresseds.builder.setHardness(0.8F);
-		COMPRESSED_POLISHED_NETHERRACK        = make(compresseds.simple("compressed_polished_netherrack"));
+		COMPRESSED_POLISHED_NETHERRACK        = make(compresseds.compressed("compressed_polished_netherrack", Blocks.NETHERRACK_POLISHED));
 		COMPRESSED_POLISHED_NETHERRACK_CARVED = make(compresseds.simple("compressed_polished_netherrack_carved"));
 		COMPRESSED_POLISHED_NETHERRACK_SLAB   = make(compresseds.slab("compressed_polished_netherrack_slab", COMPRESSED_POLISHED_NETHERRACK_CARVED));
 
@@ -317,15 +318,14 @@ public class SDOFBlocks {
 			.setBlockSound(BlockSounds.GRAVEL));
 
 		// shored gravel
-		SHORED_GRAVEL        = make(shoreds.simple("shored_gravel"));
+		SHORED_GRAVEL        = make(shoreds.shored("shored_gravel", Blocks.GRAVEL));
 		SHORED_GRAVEL_STAIRS = make(shoreds.stairs("shored_gravel_stair", SHORED_GRAVEL));
 		SHORED_GRAVEL_SLAB   = make(shoreds.slab("shored_gravel_slab", SHORED_GRAVEL));
 
 		// shored sand
 		shoreds.builder = shoreds.builder.setHardness(0.5F).setBlockSound(BlockSounds.SAND);
-		shoreds.material = Materials.SAND;
 
-		SHORED_SAND          = make(shoreds.simple("shored_sand"));
+		SHORED_SAND          = make(shoreds.shored("shored_sand", Blocks.SAND));
 		SHORED_SAND_STAIRS   = make(shoreds.stairs("shored_sand_stair", SHORED_SAND));
 		SHORED_SAND_SLAB     = make(shoreds.slab("shored_sand_slab", SHORED_SAND));
 
@@ -342,11 +342,11 @@ public class SDOFBlocks {
 			.setBlockSound(BlockSounds.METAL));
 
 		//iron plating
-		IRON_PLATING =       make(platings.simple("iron_plating"));
+		IRON_PLATING =       make(platings.plating("iron_plating", () -> Items.INGOT_IRON));
 		IRON_PLATING_SLAB =  make(platings.slab("iron_plating_slab", IRON_PLATING));
 
 		//steel plating
-		STEEL_PLATING =      make(platings.simple("steel_plating"));
+		STEEL_PLATING =      make(platings.plating("steel_plating", () -> Items.INGOT_STEEL));
 		STEEL_PLATING_SLAB = make(platings.slab("steel_plating_slab", STEEL_PLATING));
 
 
@@ -355,12 +355,12 @@ public class SDOFBlocks {
 		///////////////////
 
 		//small marble tiles
-		SMALL_MARBLE_TILES =        make(stones.simple("small_marble_tiles"));
+		SMALL_MARBLE_TILES =        make(stones.smallTiles("small_marble_tiles", POLISHED_MARBLE_TILES));
 		SMALL_MARBLE_TILES_STAIRS = make(stones.stairs("small_marble_tiles_stair", SMALL_MARBLE_TILES));
 		SMALL_MARBLE_TILES_SLAB =   make(stones.slab("small_marble_tiles_slab", SMALL_MARBLE_TILES));
 
 		//small lapis tiles
-		SMALL_LAPIS_TILES =        make(stones.simple("small_lapis_tiles"));
+		SMALL_LAPIS_TILES =        make(stones.smallTiles("small_lapis_tiles", Blocks.BRICK_LAPIS));
 		SMALL_LAPIS_TILES_STAIRS = make(stones.stairs("small_lapis_tiles_stair", SMALL_LAPIS_TILES));
 		SMALL_LAPIS_TILES_SLAB =   make(stones.slab("small_lapis_tiles_slab", SMALL_LAPIS_TILES));
 

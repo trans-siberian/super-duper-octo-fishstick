@@ -1,10 +1,15 @@
 package trans_siberian.sdof.definition;
 
+import static trans_siberian.sdof.SDOF.LOGGER;
 import static trans_siberian.sdof.SDOF.MOD_ID;
+
+import java.util.function.Supplier;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.block.model.BlockModelSlab;
@@ -18,7 +23,10 @@ import net.minecraft.core.block.BlockLogicSlab;
 import net.minecraft.core.block.BlockLogicStairs;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.material.Material;
+import net.minecraft.core.block.material.Materials;
+import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.util.collection.NamespaceID;
 import turniplabs.halplibe.helper.BlockBuilder;
 import turniplabs.halplibe.helper.RecipeBuilder;
@@ -76,12 +84,36 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 	}
 
 	// similar to IWorkbenchRecipe, this thingy builds the model of the block
-	public interface IModel<Logic extends BlockLogic> {
-		@Nullable BlockModel<Logic> getModel();
+	public sealed interface IModel<Logic extends BlockLogic> {
+		@Environment(EnvType.CLIENT)
+		default @Nullable BlockModel<Logic> getModel() {
+			final var jsonModel = this.getModelFromJson();
+			if (jsonModel != null) return jsonModel;
+			return this.getModelFallback();
+		}
+
+		@NotNull Block<Logic> block();
+
+		default @NotNull String modelPath() {
+			assert this instanceof BlockDefinition;
+			return ((BlockDefinition<?>)this).nameKey;
+		}
+
+		@Environment(EnvType.CLIENT)
+		default @Nullable BlockModel<Logic> getModelFromJson() {
+			final var jsonModel = BlockModelDispatcher.loadDataModel(MOD_ID + ":block/" + this.modelPath());
+			if (!MISSING_MODEL_ID.equals(jsonModel.modelId())) return new BlockModelGeneric<>(this.block(), jsonModel);
+			return null;
+		}
+
+		@Environment(EnvType.CLIENT)
+		default @Nullable BlockModel<Logic> getModelFallback() {
+			return null;
+		}
 	}
 
 	// this is the first concrete implementation of our BlockDefinition :D
-	public static class Simple extends BlockDefinition<BlockLogic> implements IModel<BlockLogic> {
+	public static non-sealed class Simple extends BlockDefinition<BlockLogic> implements IModel<BlockLogic> {
 		public final @NotNull Material mat;
 
 		public Simple(
@@ -96,24 +128,6 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 		@Override
 		protected BlockLogic makeLogic(@NotNull Block<BlockLogic> block) {
 			return new BlockLogic(block, this.mat);
-		}
-
-		// To get the block model, we first try to load a json-model from
-		// "sdof:block/<this block>", and if that json file does not exist, we
-		// just give up -- at which point it is up to the outside to decide what
-		// they do with it.
-		//
-		// Remember that this implementation just gives up. Some of the
-		// following implementations tho are able to fallback to other ways to
-		// build the model!
-		//
-		// Currently, we just make sure that all of our "simple blocks" have
-		// a model json
-		@Override
-		public @Nullable BlockModel<BlockLogic> getModel() {
-			final var jsonModel = BlockModelDispatcher.loadDataModel(MOD_ID + ":block/" + this.nameKey);
-			if (!MISSING_MODEL_ID.equals(jsonModel.modelId())) return new BlockModelGeneric<>(this.block(), jsonModel);
-			return null;
 		}
 	}
 
@@ -160,7 +174,7 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 	}
 
 	// stairs, it derives from the derived block definition
-	public static class Stairs extends Derived<BlockLogicStairs, BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogicStairs> {
+	public static non-sealed class Stairs extends Derived<BlockLogicStairs, BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogicStairs> {
 		public Stairs(
 			final @NotNull BlockBuilder builder,
 			final @NotNull String nameKey,
@@ -183,18 +197,17 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 			);
 		}
 
-		// here, as said above in BlockDefnition.Simple, we fall back to other
-		// models if loading the stairs json fail, in this case it is
-		// BlockModelStairs.
-		// This makes it so that we don't have to write hundreads (well, potentialaly)
-		// of jsons for every stairs and slabs, while also still allowing
-		// asset pack authors (and ourselves) to override the models with json
-		// as-if they were defined by one :3
+		@Environment(EnvType.CLIENT)
 		@Override
-		public @Nullable BlockModel<BlockLogicStairs> getModel() {
+		public @Nullable BlockModel<BlockLogicStairs> getModelFromJson() {
 			final var jsonModel = BlockModelDispatcher.loadDataModel(MOD_ID + ":block/stairs/" + this.nameKey);
 			if (!MISSING_MODEL_ID.equals(jsonModel.modelId())) return new BlockModelGenericStairs<>(this.block(), jsonModel);
+			return null;
+		}
 
+		@Environment(EnvType.CLIENT)
+		@Override
+		public @Nullable BlockModel<BlockLogicStairs> getModelFallback() {
 			// this can fail if our base block does not have a model yet assigned,
 			// having this here saves us from otherwise having to guess which one of the stairs
 			// is the bad boy >:(
@@ -205,7 +218,7 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 		}
 	}
 
-	public static class Slab extends Derived<BlockLogicSlab, BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogicSlab> {
+	public static non-sealed class Slab extends Derived<BlockLogicSlab, BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogicSlab> {
 		public Slab(
 			final @NotNull BlockBuilder builder,
 			final @NotNull String nameKey,
@@ -226,22 +239,12 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 			);
 		}
 
-		// similar to stairs, we fallback to BlockModelSlab
-		@Override
-		public @Nullable BlockModel<BlockLogicSlab> getModel() {
-			final var jsonModel = this.getJsonModel();
-			if (jsonModel != null) return jsonModel;
-
-			assert BlockModelDispatcher.getInstance().getDispatch(this.block().getLogic().modelBlock) != null
-				: "modelBlock of a stair used by BlockModelSlab must not be unsassighed: " + this.block();
-
-			return new BlockModelSlab<>(this.block());
-		}
-
 		// slab's json models are by convention defined in a more complicated way,
 		// requiring a json for both full, lower, and upper models.
 		// we fail (return null) if any of which is not found
-		private @Nullable BlockModelGenericSlab<BlockLogicSlab> getJsonModel() {
+		@Environment(EnvType.CLIENT)
+		@Override
+		public @Nullable BlockModel<BlockLogicSlab> getModelFromJson() {
 			final String full = "/full";
 			final String lower = "/lower";
 			final String upper = "/upper";
@@ -264,10 +267,19 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 
 			return new BlockModelGenericSlab<>(this.block(), jsonModelLower, jsonModelUpper, jsonModelFull);
 		}
+
+		@Environment(EnvType.CLIENT)
+		@Override
+		public @Nullable BlockModel<BlockLogicSlab> getModelFallback() {
+			assert BlockModelDispatcher.getInstance().getDispatch(this.block().getLogic().modelBlock) != null
+				: "modelBlock of a stair used by BlockModelSlab must not be unsassighed: " + this.block();
+
+			return new BlockModelSlab<>(this.block());
+		}
 	}
 
 	// We use a unique definition for bricks, so that it's recipes can be automatically generated.
-	public static class Bricks extends Derived<BlockLogic, BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogic> {
+	public static non-sealed class Bricks extends Derived<BlockLogic, BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogic> {
 		public Bricks(
 			final @NotNull BlockBuilder builder,
 			final @NotNull String nameKey,
@@ -290,10 +302,8 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 		}
 
 		@Override
-		public @Nullable BlockModel<BlockLogic> getModel() {
-			final var jsonModel = BlockModelDispatcher.loadDataModel(MOD_ID + ":block/bricks/" + this.nameKey);
-			if (!MISSING_MODEL_ID.equals(jsonModel.modelId())) return new BlockModelGeneric<>(this.block(), jsonModel);
-			return null;
+		public @NotNull String modelPath() {
+			return "bricks/" + this.nameKey;
 		}
 	}
 
@@ -304,7 +314,7 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 	//
 	// We can add a custom CheckeredTiles definition in the future if we want to add more of those,
 	// however currently we just manually specify their recipe in SDOFRecipes.init
-	public static class Tiles extends Derived<BlockLogic, BlockLogicSlab> implements IWorkbenchRecipe, IModel<BlockLogic> {
+	public static non-sealed class Tiles extends Derived<BlockLogic, BlockLogicSlab> implements IWorkbenchRecipe, IModel<BlockLogic> {
 		public Tiles(
 			final @NotNull BlockBuilder builder,
 			final @NotNull String nameKey,
@@ -326,11 +336,116 @@ public abstract class BlockDefinition<Logic extends BlockLogic> {
 			);
 		}
 
+
 		@Override
-		public @Nullable BlockModel<BlockLogic> getModel() {
-			final var jsonModel = BlockModelDispatcher.loadDataModel(MOD_ID + ":block/tiles/" + this.nameKey);
-			if (!MISSING_MODEL_ID.equals(jsonModel.modelId())) return new BlockModelGeneric<>(this.block(), jsonModel);
-			return null;
+		public @NotNull String modelPath() {
+			return "tiles/" + this.nameKey;
+		}
+	}
+
+	public static non-sealed class SmallTiles extends Derived<BlockLogic, BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogic> {
+		public SmallTiles(
+			final @NotNull BlockBuilder builder,
+			final @NotNull String nameKey,
+			final @NotNull Block<?> base
+		) {
+			super(builder, nameKey, base);
+		}
+
+		@Override
+		protected BlockLogic makeLogic(@NotNull Block<BlockLogic> block) {
+			return new BlockLogic(block, this.base.getMaterial());
+		}
+
+		@Override
+		public void makeWorkbenchRecipe() {
+			this.makeShapedWorkbenchRecipe(4,
+				"XX",
+				"XX"
+			);
+		}
+	}
+
+	public static non-sealed class Compressed extends Derived<BlockLogic, BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogic> {
+		public Compressed(
+			final @NotNull BlockBuilder builder,
+			final @NotNull String nameKey,
+			final @NotNull Block<? extends BlockLogic> base
+		) {
+			super(builder, nameKey, base);
+		}
+
+		@Override
+		protected BlockLogic makeLogic(@NotNull Block<BlockLogic> block) {
+			return new BlockLogic(block, this.base.getMaterial());
+		}
+
+
+		@Override
+		public void makeWorkbenchRecipe() {
+			this.makeShapedWorkbenchRecipe(1,
+				"XXX",
+				"XXX",
+				"XXX"
+			);
+		}
+	}
+
+	public static non-sealed class Shored extends BlockDefinition<BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogic> {
+		public final Block<? extends BlockLogic> meat;
+
+		public Shored(
+			final @NotNull BlockBuilder builder,
+			final @NotNull String nameKey,
+			final @NotNull Block<? extends BlockLogic> meat
+		) {
+			super(builder, nameKey);
+			this.meat = meat;
+		}
+
+		@Override
+		protected BlockLogic makeLogic(@NotNull Block<BlockLogic> block) {
+			return new BlockLogic(block, this.meat.getMaterial());
+		}
+
+		@Override
+		public void makeWorkbenchRecipe() {
+			RecipeBuilder.Shaped(MOD_ID)
+				.setShape(
+					"MS",
+					"SM")
+				.addInput('M', this.meat)
+				.addInput('S', Items.STICK)
+				.create(this.nameKey, new ItemStack(this.block(), 2));
+		}
+	}
+
+	public static non-sealed class Plating extends BlockDefinition<BlockLogic> implements IWorkbenchRecipe, IModel<BlockLogic> {
+		public final Supplier<IItemConvertible> ingredient;
+
+		public Plating(
+			final @NotNull BlockBuilder builder,
+			final @NotNull String nameKey,
+			final @NotNull Supplier<IItemConvertible> ingredient
+		) {
+			super(builder, nameKey);
+			this.ingredient = ingredient;
+		}
+
+		@Override
+		protected BlockLogic makeLogic(@NotNull Block<BlockLogic> block) {
+			return new BlockLogic(block, Materials.METAL);
+		}
+
+		@Override
+		public void makeWorkbenchRecipe() {
+			RecipeBuilder.Shaped(MOD_ID)
+				.setShape(
+					" # ",
+					"# #",
+					" # ")
+				.addInput('#', this.ingredient.get())
+				.create(this.nameKey, new ItemStack(this.block(), 4));
 		}
 	}
 }

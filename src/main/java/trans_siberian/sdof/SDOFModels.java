@@ -5,10 +5,13 @@ import static trans_siberian.sdof.SDOF.MOD_ID;
 
 import org.jetbrains.annotations.NotNull;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.block.model.*;
 import trans_siberian.sdof.definition.BlockDefinition;
 import trans_siberian.sdof.model.BlockModelCheckeredStairs;
 
+@Environment(EnvType.CLIENT)
 public class SDOFModels {
 	public static boolean hasInit = false;
 

@@ -1,5 +1,7 @@
 package trans_siberian.sdof.definition;
 
+import java.util.function.Supplier;
+
 import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.core.block.Block;
@@ -7,6 +9,7 @@ import net.minecraft.core.block.BlockLogic;
 import net.minecraft.core.block.BlockLogicSlab;
 import net.minecraft.core.block.BlockLogicSupplier;
 import net.minecraft.core.block.material.Material;
+import net.minecraft.core.item.IItemConvertible;
 import turniplabs.halplibe.helper.BlockBuilder;
 
 // This is a convenience type, containing a reused BlockBuilder, and using it to
@@ -47,16 +50,43 @@ public class BlockMetaDefinition {
 		final @NotNull String nameKey,
 		final @NotNull Block<?> base
 	) {
-		return new BlockDefinition.Bricks(builder, nameKey, base);
+		return new BlockDefinition.Bricks(this.builder, nameKey, base);
 	}
 
 	public @NotNull BlockDefinition.Tiles tiles(
 		final @NotNull String nameKey,
 		final @NotNull Block<? extends BlockLogicSlab> base
 	) {
-		return new BlockDefinition.Tiles(builder, nameKey, base);
+		return new BlockDefinition.Tiles(this.builder, nameKey, base);
 	}
 
+	public @NotNull BlockDefinition.SmallTiles smallTiles(
+		final @NotNull String nameKey,
+		final @NotNull Block<?> base
+	) {
+		return new BlockDefinition.SmallTiles(this.builder, nameKey, base);
+	}
+
+	public @NotNull BlockDefinition.Compressed compressed(
+		final @NotNull String nameKey,
+		final @NotNull Block<? extends BlockLogic> base
+	) {
+		return new BlockDefinition.Compressed(this.builder, nameKey, base);
+	}
+
+	public @NotNull BlockDefinition.Shored shored(
+		final @NotNull String nameKey,
+		final @NotNull Block<? extends BlockLogic> meat
+	) {
+		return new BlockDefinition.Shored(this.builder, nameKey, meat);
+	}
+
+	public @NotNull BlockDefinition.Plating plating(
+		final @NotNull String nameKey,
+		final @NotNull Supplier<IItemConvertible> ingredient
+	) {
+		return new BlockDefinition.Plating(this.builder, nameKey, ingredient);
+	}
 
 	public static class WithMaterial extends BlockMetaDefinition {
 		public @NotNull Material material;
@@ -69,5 +99,4 @@ public class BlockMetaDefinition {
 			return new BlockDefinition.Simple(this.builder, nameKey, this.material);
 		}
 	}
-
 }
