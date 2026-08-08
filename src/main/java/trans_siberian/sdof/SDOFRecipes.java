@@ -34,6 +34,22 @@ public class SDOFRecipes {
 			.addInput('M', Blocks.MESH)
 			.create("vent_block", new ItemStack(SDOFBlocks.VENT_BLOCK, 4));
 
+		RecipeBuilder.Shaped(MOD_ID, "###")
+			.addInput('#', SDOFBlocks.COMPRESSED_COBBLESTONE)
+			.create("compressed_cobblestone_slab", new ItemStack(SDOFBlocks.COMPRESSED_COBBLESTONE_SLAB, 6));
+
+		RecipeBuilder.Shaped(MOD_ID, "###")
+			.addInput('#', SDOFBlocks.COMPRESSED_COBBLESTONE_MOSSY)
+			.create("compressed_cobblestone_mossy_slab", new ItemStack(SDOFBlocks.COMPRESSED_COBBLESTONE_MOSSY_SLAB, 6));
+
+		RecipeBuilder.Shaped(MOD_ID, "###")
+			.addInput('#', SDOFBlocks.COMPRESSED_POLISHED_STONE)
+			.create("compressed_polished_stone_slab", new ItemStack(SDOFBlocks.COMPRESSED_POLISHED_STONE_SLAB, 6));
+
+		RecipeBuilder.Shaped(MOD_ID, "###")
+			.addInput('#', SDOFBlocks.COMPRESSED_POLISHED_NETHERRACK)
+			.create("compressed_polished_netherrack_slab", new ItemStack(SDOFBlocks.COMPRESSED_POLISHED_NETHERRACK_SLAB, 6));
+
 		final var workbenchGroup = RecipeBuilder.getRecipeGroup(MOD_ID, "workbench", null);
 
 		// by having this here, we skip the need to manually add every recipes
